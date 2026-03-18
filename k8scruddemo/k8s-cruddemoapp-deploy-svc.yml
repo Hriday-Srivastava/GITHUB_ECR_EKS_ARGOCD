@@ -1,3 +1,17 @@
+# ---------------- Service Account with ECR access (IRSA) --------------
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: k8cruddemoapp-sa
+  namespace: default
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/EKS-ECR-Access-Role
+spec:
+  template:
+    spec:
+      containers:
+        - image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/mr-heart-docker-images-repo:302766d
+---
 # ---------------- Spring Boot Deployment --------------
 apiVersion: apps/v1
 kind: Deployment
@@ -15,9 +29,10 @@ spec:
       labels:
         app: k8cruddemoapp
     spec:
+      serviceAccountName: k8cruddemoapp-sa
       containers:
         - name: k8cruddemoapp
-          image: ""
+          image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/mr-heart-docker-images-repo:302766d
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -44,7 +59,3 @@ spec:
     - port: 8080
       targetPort: 8080
       # nodePort: 32080  # optional
-  template:
-    spec:
-      containers:
-        - image: ""
