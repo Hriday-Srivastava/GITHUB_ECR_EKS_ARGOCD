@@ -45,7 +45,7 @@ jobs:
     # 🔹 Build Docker Image
     - name: Build Docker Image
       run: |
-        docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/k8scruddemoapp:$IMAGE_TAG .
+        docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/mr-heart-docker-images-repo:$IMAGE_TAG .
       working-directory: k8scruddemo
 
     # 🔹 Push to ECR
