@@ -62,7 +62,7 @@ jobs:
     # -------- Update Deployment YAML ----------
     - name: Update image tag in Deployment file
       run: |
-        IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/k8scruddemoapp:${GITHUB_SHA::7}
+        IMAGE_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/mr-heart-docker-images-repo:${GITHUB_SHA::7}
 
         yq -i ".spec.template.spec.containers[0].image = \"${IMAGE_URI}\"" k8scruddemo/k8s-cruddemoapp-deploy-svc.yml
 
