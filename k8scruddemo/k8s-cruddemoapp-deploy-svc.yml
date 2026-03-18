@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: k8cruddemoapp
-          image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/mr-heart-docker-images-repo:302766d
+          image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/mr-heart-docker-images-repo:a3be542
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -44,4 +44,7 @@ spec:
     - port: 8080
       targetPort: 8080
       # nodePort: 32080  # optional
-  
+  template:
+    spec:
+      containers:
+        - image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/mr-heart-docker-images-repo:a3be542
