@@ -1,3 +1,12 @@
+# ---------------- Service Account with ECR access (IRSA) ----------------
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: k8cruddemoapp-sa
+  namespace: default
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/EKS-ECR-Access-Role
+---
 # ---------------- Spring Boot Deployment ----------------
 apiVersion: apps/v1
 kind: Deployment
@@ -15,10 +24,11 @@ spec:
       labels:
         app: k8cruddemoapp
     spec:
+      serviceAccountName: k8cruddemoapp-sa   # <-- Added for IRSA
       containers:
         - name: k8cruddemoapp
-          image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:98f6b24 # <-- यहाँ अपना image नाम दें That name was given at the time of creation docker image.
-          imagePullPolicy: Always #Kubernetes docker hub registry से image pull करने की कोशिश नहीं करेगा
+          image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:98f6b24
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
@@ -37,14 +47,10 @@ metadata:
   labels:
     app: k8cruddemoapp
 spec:
-  type: NodePort # चाहें तो ClusterIP भी कर सकते हैं
+  type: NodePort
   selector:
     app: k8cruddemoapp
   ports:
     - port: 8080
       targetPort: 8080
-      #nodePort: 32080   # optional: Kubernetes चुने तो इसे हटा दें
-  template:
-    spec:
-      containers:
-        - image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:98f6b24
+      #nodePort: 32080  # optional
