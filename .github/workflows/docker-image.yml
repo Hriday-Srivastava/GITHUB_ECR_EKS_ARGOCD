@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  sbcrudk8s-ci:
+  dev-to-ecr-eks-argocd-ci-jobs:
     runs-on: ubuntu-latest
 
     steps:
@@ -51,7 +51,7 @@ jobs:
     # 🔹 Push to ECR
     - name: Push to ECR
       run: |
-        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/k8scruddemoapp:$IMAGE_TAG
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/mr-heart-docker-images-repo:$IMAGE_TAG
 
     # -------- Install yq ----------
     - name: Install yq
