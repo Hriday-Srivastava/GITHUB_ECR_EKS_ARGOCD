@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: k8cruddemoapp
-          image: hridaysrivastava/k8scruddemoapp:fbfa952 # <-- यहाँ अपना image नाम दें That name was given at the time of creation docker image.
+          image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:98f6b24 # <-- यहाँ अपना image नाम दें That name was given at the time of creation docker image.
           imagePullPolicy: Always #Kubernetes docker hub registry से image pull करने की कोशिश नहीं करेगा
           ports:
             - containerPort: 8080
@@ -47,4 +47,4 @@ spec:
   template:
     spec:
       containers:
-        - image: hridaysrivastava/k8scruddemoapp:fbfa952
+        - image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:98f6b24
