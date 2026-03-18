@@ -10,7 +10,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:d7f1891
+        - image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:4a76a84
 ---
 # ---------------- Spring Boot Deployment --------------
 apiVersion: apps/v1
@@ -32,7 +32,7 @@ spec:
       serviceAccountName: k8cruddemoapp-sa # <-- Added for IRSA
       containers:
         - name: k8cruddemoapp
-          image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:d7f1891
+          image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:4a76a84
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -62,4 +62,4 @@ spec:
   template:
     spec:
       containers:
-        - image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:d7f1891
+        - image: 629981134890.dkr.ecr.ap-south-1.amazonaws.com/k8scruddemoapp:4a76a84
